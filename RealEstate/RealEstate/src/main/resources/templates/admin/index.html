@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="admin/fragments/head :: head">
+    <style>
+        .card {
+            border-radius: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .card-text {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container-fluid position-relative d-flex p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-dark position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Sidebar Start -->
+        <div th:replace="admin/fragments/sidebar :: sidebar"></div>
+        <!-- Sidebar End -->
+
+
+        <!-- Content Start -->
+        <div class="content">
+            <!-- Navbar Start -->
+            <div th:replace="admin/fragments/navbar :: navbar"></div>
+            <!-- Navbar End -->
+
+
+            <!-- CODE HERE -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="row vh-100 bg-secondary rounded align-items-start justify-content-center mx-0">
+                    <!-- Row for Cards -->
+                    <div class="row gy-4"> <!-- gy-4: khoảng cách hàng -->
+                        <!-- Customer Card -->
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <div class="card bg-info text-white text-center shadow">
+                                <div class="card-body">
+                                    <i class="fa fa-users fa-3x mb-3"></i>
+                                    <h5 class="card-title">Total Customers</h5>
+                                    <p class="card-text display-4" id="totalCustomers"></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Agent Card -->
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <div class="card bg-success text-white text-center shadow">
+                                <div class="card-body">
+                                    <i class="fa fa-user-tie fa-3x mb-3"></i>
+                                    <h5 class="card-title">Total Agents</h5>
+                                    <p class="card-text display-4" id="totalAgents"></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Transaction Card -->
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <div class="card bg-warning text-dark text-center shadow">
+                                <div class="card-body">
+                                    <i class="fa fa-file-invoice-dollar fa-3x mb-3"></i>
+                                    <h5 class="card-title">Total Transactions</h5>
+                                    <p class="card-text display-4" id="totalTransactions"></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Property Card -->
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <div class="card bg-danger text-white text-center shadow">
+                                <div class="card-body">
+                                    <i class="fa fa-building fa-3x mb-3"></i>
+                                    <h5 class="card-title">Total Properties</h5>
+                                    <p class="card-text display-4" id="totalProperties"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row for Chart -->
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <h1>Sales property report</h1>
+                            <div class="chart-container" style="position: relative; height:450px; width:100%">
+                                <canvas id="transactionChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+
+            <!-- CODE HERE -->
+
+            <!-- Footer Start -->
+            <footer th:replace="admin/fragments/footer :: footer"></footer>
+            <!-- Footer End -->
+
+        </div>
+        <!-- Content End -->
+
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+    <div th:replace="admin/fragments/javascript :: javascript"></div>
+    <script th:src="@{/fetchapi/admin/dashboard.js}"></script>
+
+
+</body>
+
+</html>

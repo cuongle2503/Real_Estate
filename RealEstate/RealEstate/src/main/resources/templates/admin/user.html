@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="admin/fragments/head :: head"></head>
+<body>
+<div class="container-fluid position-relative d-flex p-0">
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-dark position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+
+
+    <!-- Sidebar Start -->
+    <div th:replace="admin/fragments/sidebar :: sidebar"></div>
+    <!-- Sidebar End -->
+
+
+    <!-- Content Start -->
+    <div class="content">
+        <!-- Navbar Start -->
+        <div th:replace="admin/fragments/navbar :: navbar"></div>
+        <!-- Navbar End -->
+
+
+        <!-- CODE HERE -->
+        <div class="col-12">
+            <div class="bg-secondary rounded h-100 p-4">
+                <h6 class="mb-4">User Information Table</h6>
+                <select id="roleSelect" onchange="handleRoleSelection()">
+                    <option value="">All Users</option>
+                    <option value="customer">Customers</option>
+                    <option value="agent">Agents</option>
+                    <!-- Thêm các role khác nếu cần -->
+                </select>
+                <div class="table-responsive">
+                    <table class="table text-center">
+                        <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">User Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col">Role</th>
+                        </tr>
+                        </thead>
+                        <tbody id="userTableBody">
+                        <!-- Rows will be added dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- CODE HERE -->
+
+        <!-- Footer Start -->
+        <div th:replace="admin/fragments/footer :: footer"></div>
+        <!-- Footer End -->
+
+    </div>
+    <!-- Content End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+</div>
+<div th:replace="admin/fragments/javascript :: javascript"></div>
+<script th:src="@{/fetchapi/admin/user.js}"></script>
+<script th:src="@{/fetchapi/name.js}"></script>
+
+</body>
+
+</html>

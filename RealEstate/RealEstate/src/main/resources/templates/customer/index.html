@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="customer/fragments/head :: head"></head>
+
+
+<body>
+<div class="container-xxl bg-white p-0">
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+    <!-- Navbar Start -->
+    <div th:replace="customer/fragments/navbar :: navbar"></div>
+    <!-- Navbar End -->
+
+    <!-- Header Start -->
+    <div th:replace="customer/fragments/header :: header"></div>
+    <!-- Header End -->
+    <!-- About Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                    <div class="about-img position-relative overflow-hidden p-5 pe-0">
+                        <img class="img-fluid w-100" th:src="@{/property/img/about.jpg}">
+                    </div>
+                </div>
+                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+                    <h1 class="mb-4">Discover Your Dream Home with Ease</h1>
+                    <p class="mb-4">Finding the perfect property has never been easier. Explore our wide range of homes, from cozy apartments to luxurious villas, tailored to fit your lifestyle and budget.</p>
+                    <p><i class="fa fa-check text-primary me-3"></i>Extensive listings of properties across prime locations</p>
+                    <p><i class="fa fa-check text-primary me-3"></i>Affordable pricing with flexible financing options</p>
+                    <p><i class="fa fa-check text-primary me-3"></i>Professional support to guide you every step of the way</p>
+                    <a class="btn btn-primary py-3 px-5 mt-3" href="#">Learn More</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="row g-0 gx-5 align-items-end">
+                <div class="col-lg-6">
+                    <div
+                            class="text-start mx-auto mb-5 wow slideInLeft"
+                            data-wow-delay="0.1s"
+                    >
+                        <h1 class="mb-3">Property Listing</h1>
+                        <p>
+                            Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut
+                            dolore lorem kasd vero ipsum sit eirmod sit diam justo sed
+                            rebum.
+                        </p>
+                    </div>
+                </div>
+                <div
+                        class="col-lg-6 text-start text-lg-end wow slideInRight"
+                        data-wow-delay="0.1s"
+                >
+                    <ul class="nav nav-pills d-inline-flex justify-content-end mb-5">
+                        <li class="nav-item me-2">
+                            <button id="showAllBtn" class="btn btn-outline-primary">All</button>
+                        </li>
+                        <li class="nav-item me-2">
+                            <button id="showSellBtn" class="btn btn-outline-primary ">For Sell</button>
+                        </li>
+                        <li class="nav-item me-0">
+                            <button id="showRentBtn" class="btn btn-outline-primary ">For Rent</button>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+            <div class="tab-content">
+                <div id="tab-1" class="tab-pane fade show p-0 active">
+
+                    <div class="row g-4" id="propertyContainer">
+
+
+                    </div>
+                    <div class="col-12 pt-5 d-flex justify-content-end">
+                        <button id="prevPageBtn" class="btn btn-primary py-3 px-5" onclick="previousPage()" style="display: none;">Previous</button>
+                        <button id="nextPageBtn" class="btn btn-primary py-3 px-5" onclick="nextPage()" style="display: none;">Next</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+    <!-- Footer Start -->
+    <footer th:replace="customer/fragments/footer :: footer"></footer>
+    <!-- Footer End -->
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+</div>
+<div th:replace="customer/fragments/javascript:: javascript"></div>
+<script th:src="@{/fetchapi/property/property.js}"></script>
+
+</body>
+</html>

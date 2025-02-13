@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="customer/fragments/head :: head">
+    <style>
+        /* Modal header */
+        .modal-header {
+            background-color: #007bff;
+            color: #fff;
+            border-bottom: none;
+        }
+
+
+        /* Chat body */
+        #chatBody {
+            background-color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            gap: 15px; /* Tăng khoảng cách giữa các tin nhắn */
+            padding: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+            border-radius: 10px;
+        }
+
+        /* Chat message bubbles */
+        .chat-message {
+            padding: 12px 18px;
+            border-radius: 15px;
+            max-width: 75%; /* Hạn chế chiều rộng của tin nhắn */
+            word-wrap: break-word;
+            margin-bottom: 15px; /* Thêm khoảng cách dưới mỗi tin nhắn */
+            font-size: 16px; /* Tăng kích thước chữ cho dễ đọc */
+            line-height: 1.5;
+        }
+
+        /* Chat message from customer */
+        .chat-message.customer {
+            background-color: #00B98E;
+            color: white;
+            align-self: flex-end; /* Căn phải cho khách hàng */
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Thêm bóng mờ */
+        }
+
+        /* Chat message from agent */
+        .chat-message.agent {
+            background-color: #e9ecef;
+            color: #333;
+            align-self: flex-start; /* Căn trái cho agent */
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Thêm bóng mờ */
+        }
+
+        /* Footer input area */
+        .modal-footer {
+            padding: 0;
+            background-color: #fff;
+            border-top: 1px solid #ddd;
+        }
+
+        /* Input area styles */
+        .input-group textarea {
+            border: none;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 10px;
+            resize: none;
+            width: calc(100% - 45px); /* Đảm bảo textarea chiếm hết chiều rộng */
+        }
+
+        .input-group button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+
+    </style>
+</head>
+
+
+<body>
+<div class="container-xxl bg-white p-0">
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+    <!-- Navbar Start -->
+    <div th:replace="customer/fragments/navbar :: navbar"></div>
+    <!-- Navbar End -->
+
+    <!-- Header Start -->
+    <div th:replace="customer/fragments-property-detail/header :: header"></div>
+    <!-- Header End -->
+    <!-- About Start -->
+    <div class="container-xxl py-5">
+        <div class="container" id="propertyDetail">
+<!--            <div class="row g-5 align-items-center">-->
+<!--                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">-->
+<!--                    <div class="about-img position-relative overflow-hidden p-5 pe-0">-->
+<!--                        <img class="img-fluid w-100" th:src="@{/property/img/about.jpg}">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">-->
+<!--                    <h1 class="mb-4">#1 Place To Find The Perfect Property</h1>-->
+<!--                    <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>-->
+<!--                    <p><i class="fa fa-check text-primary me-3"></i>Tempor erat elitr rebum at clita</p>-->
+<!--                    <p><i class="fa fa-check text-primary me-3"></i>Aliqu diam amet diam et eos</p>-->
+<!--                    <p><i class="fa fa-check text-primary me-3"></i>Clita duo justo magna dolore erat amet</p>-->
+<!--                    <a class="btn btn-primary py-3 px-5 mt-3" href="">Read More</a>-->
+<!--                </div>-->
+<!--            </div>-->
+        </div>
+    </div>
+    <!-- About End -->
+
+    <!-- Appointment Modal -->
+    <div class="modal fade" id="appointmentModal" tabindex="-1" aria-labelledby="appointmentModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" style="max-width: 500px;">
+            <div class="modal-content" style="border-radius: 15px; overflow: hidden;">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="appointmentModalLabel">Chat with Agent</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="chatBody" style="padding: 15px; background-color: #f5f5f5; height:400px; max-height: 600px; overflow-y: auto;">
+                    <div id="chatMessages">
+                        <!-- Tin nhắn sẽ được thêm vào đây -->
+                    </div>
+                </div>
+                <div class="modal-footer p-0" style="border-top: none;">
+                    <div class="input-group" style="border-top: 1px solid #ccc;">
+                        <textarea id="appointmentDescription" class="form-control" rows="1" placeholder="Type a message..." style="resize: none; border: none;"></textarea>
+                        <button type="button" class="btn btn-primary" id="submitAppointment">
+                            <i class="fa fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Footer Start -->
+    <footer th:replace="customer/fragments/footer :: footer"></footer>
+    <!-- Footer End -->
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+</div>
+<div th:replace="customer/fragments/javascript:: javascript"></div>
+<script th:src="@{/fetchapi/property/property-detail.js}"></script>
+
+</body>
+</html>
